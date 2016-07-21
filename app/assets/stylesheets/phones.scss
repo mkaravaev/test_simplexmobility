@@ -1,3 +1,28 @@
 // Place all the styles related to the Phones controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.container {
+  margin: 30px;
+}
+
+.main-menu {
+  border-bottom: 1px solid #eee;
+  height: 150px;
+}
+
+.menu-block {
+  padding: auto;
+}
+
+.separator {
+  .separation-text {
+    text-align: center;
+  }
+}
+
+.legend-text {
+  text-align: center;
+}
+
+
