@@ -1,7 +1,9 @@
-form.pure-form.pure-form-aligned
+form.pure-form.pure-form-aligned ng-controller="PhoneController as phone"
   fieldset
     legend.legend-text
       | Search by manufactorer and model
-    select.pure-input-1-2#phones-manufacturer
-    select.pure-input-1-2.hidden#phone-model
-
+    select.pure-input-1-2#phones-manufacturer ng-model="manufactorerSelected" ng-change="selectedVal(manufactorerSelected)" data-ng-options="manufactorer as manufactorer.name for manufactorer in manufactorers"
+      option
+        | {{manufactorer}}
+      option value="" Select Manufactorer
+    select.pure-input-1-2#phone-model ng-class="modelSelectingActive == true ? 'active' : 'hidden'"
