@@ -7,14 +7,15 @@ gem 'pure-css-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 
+gem 'nokogiri', '~> 1.6'
+
 gem 'slim'
-gem 'simple_form'
-gem 'jquery-rails'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 
 group :development, :test do
   gem 'byebug'
+  gem 'pry'
 end
 
 group :development do
