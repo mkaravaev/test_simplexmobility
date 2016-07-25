@@ -1,26 +1,39 @@
 class Api::PhoneModelsController < ApplicationController
+  before_action :init_sites_for_parsing
 
   def index
-    @phone_models = PhoneModelsExtractorService.new(phone_brand_params[:brand])
-    @phone_models.get_models
-    render json: @phone_models.result, status: @phone_models.status
+    @phone_models = PhoneModelsFacade.new(phone_params)
+    render json: @phone_models.perform, status: :ok
   end
 
   def show
-    @phone_model = PhoneModelsExtractorService.new(phone_brand_params[:url])
-    @phone_model.get_model
-    render json: [@phone_model.result.first], status: @phone_model.status
+    @phone_model = SiteParserService.new(
+      phone_params,
+      PhoneModelParsingService.new
+    )
+    render json: @phone_model.run, status: :ok
   end
 
   def search
-    @phone_models = PhoneModelsSearchService.new(phone_brand_params[:q])
-    @phone_models.get_models
-    render json: @phone_models.result, status: @phone_models.status
+    @phone_models = PhoneSearchFacade.new(phone_params)
+    render json: @phone_models.perform, status: :ok
   end
 
   private
 
-  def phone_brand_params
-    params.permit(:brand, :url, :q)
+  def init_sites_for_parsing
+    @sites = [Site::Gsmarena.new] #Add new site here
+  end
+
+  def sanitized_params
+    params.permit(:brand_name, :models_links, :query)
+  end
+
+  def phone_params
+    @sites.each do |site|
+      sanitized_params.map do |key, val|
+        site[key] = val
+      end
+    end
   end
 end

@@ -8,7 +8,7 @@ app.controller("PhoneController", ["$scope", '$http', function($scope, $http){
 
   $scope.modelSelectedVal = function(item){
     link = item.link
-    http_config.url = '/api/phone_model?url=' + link
+    http_config.url = '/api/phone_model?models_links=' + link
 
     $http(http_config).
       success(function(data, status, headers, config) {
@@ -19,7 +19,7 @@ app.controller("PhoneController", ["$scope", '$http', function($scope, $http){
   $scope.selectedVal = function(item){
     var query = item.name
 
-    http_config.url = "/api/phone_models?brand=" + query
+    http_config.url = "/api/phone_models?brand_name=" + query
     $scope.models = {};
 
     $http(http_config).
@@ -30,7 +30,7 @@ app.controller("PhoneController", ["$scope", '$http', function($scope, $http){
   };
 
   $scope.searchModel = function(query){
-    http_config.url = "/api/phone_models/search?q=" + query
+    http_config.url = "/api/phone_models/search?query=" + query
     $scope.models = {};
 
     $http(http_config).

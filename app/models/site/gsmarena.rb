@@ -1,12 +1,10 @@
 module Site
-  class Gsmarena < Struct.new(:brand_name, :models_links)
-    SITE_URL = "http://www.gsmarena.com/"
+  class Gsmarena < Struct.new(:brand_name, :models_links, :query)
+    SITE_URL = "http://gsmarena.com/"
     MODELS_LIST_PATH = "makers.php3"
     MODELS_TABLE_CSS = "div.makers ul li"
     MODEL_FRAME_CSS = "div#specs-list table tr"
-
-    def options
-    end
+    SEARCH_PATH = "results.php3?sQuickSearch=yes&sName="
 
     def site_url
       SITE_URL
@@ -14,6 +12,14 @@ module Site
 
     def models_list_path
       SITE_URL + MODELS_LIST_PATH
+    end
+
+    def models_link_path
+      if self.query
+        SITE_URL + SEARCH_PATH + self.query
+      else
+        SITE_URL + self.models_links
+      end
     end
 
     def model_frame_css
@@ -46,7 +52,7 @@ module Site
       end
     end
 
-    def find_brand_link
+    def find_brand_links_and_titles
       lambda do |node|
         node_link = node.at_css("a")['href']
         node_title = node.at_css("a strong span").text.strip
