@@ -4,11 +4,10 @@ class PhonesListParsingService
 
   def run(context)
     result = []
-    context.models_links.each do |model_link|
-      doc = Nokogiri::HTML(open(context.site_url + model_link))
-      doc.css(context.model_css).each do |node|
-        result << context.find_brand_link.call(node)
-      end
+    doc = Nokogiri::HTML(open(context.models_link_path))
+    doc.css(context.model_css).each do |node|
+      result << context.find_brand_links_and_titles.call(node)
+      context.models_links = result.map{|x| x[:link]}
     end
     result
   end

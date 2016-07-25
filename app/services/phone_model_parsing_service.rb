@@ -4,7 +4,7 @@ class PhoneModelParsingService
 
   def run(context)
     final_result = []
-    context.models_links.each do |model_link|
+    [context.models_links].flatten.each do |model_link|
       result = []
       doc = Nokogiri::HTML(open(context.site_url + model_link))
       doc.css(context.model_frame_css).each do |node|
@@ -12,7 +12,6 @@ class PhoneModelParsingService
       end
       final_result << Hash[*result.flatten]
     end
-
     return final_result
   end
 
