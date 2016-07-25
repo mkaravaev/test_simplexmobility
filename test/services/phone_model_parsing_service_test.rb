@@ -19,4 +19,10 @@ class PhoneModelParsingServiceTest < ActiveSupport::TestCase
     @options.models_links = ["yota_yotaphone-6961.php", "apple_ipad_mini_4-7561.php"]
     assert_equal [yota_result, ipad_result], @model_parser.run(@options)
   end
+
+  test "should strip model info from empty arrays" do
+    expected = {'test'=> 'test'}
+    array = [['test', 'test'], nil, []]
+    assert_equal expected, @model_parser.send(:convert_result, array)
+  end
 end

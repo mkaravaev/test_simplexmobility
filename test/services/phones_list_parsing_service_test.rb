@@ -27,10 +27,4 @@ class PhonesListParsingServiceTest < ActiveSupport::TestCase
     assert_equal expected, @models_parser.run(@options)
   end
 
-  test "should save all found links to site config object" do
-    @options.query = "b2000"
-    expected = ["lg_b2000-1134.php", "nec_db2000-156.php"]
-    @models_parser.run(@options)
-    assert_equal expected, @options.models_links
-  end
 end
