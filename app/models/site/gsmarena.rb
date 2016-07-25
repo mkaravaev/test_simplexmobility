@@ -63,7 +63,7 @@ module Site
     def find_brand_list_link
       lambda do |node|
         node.at_css("a span").remove
-        if node.text.split.first == self.brand_name.capitalize
+        if node.text.split.first.capitalize == self.brand_name.capitalize
           return node.at_css("a")['href']
         end
       end
