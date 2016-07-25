@@ -10,7 +10,8 @@ class PhoneModelParsingService
       doc.css(context.model_frame_css).each do |node|
         result << context.extract_model_info.call(node)
       end
-      final_result << Hash[*result.flatten]
+      pre_result = result.delete_if {|el| el.blank? }
+      final_result << Hash[*pre_result.flatten]
     end
     return final_result
   end
