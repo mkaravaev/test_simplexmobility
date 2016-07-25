@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'rails', '4.2.7'
 gem 'sass-rails', '~> 5.0'
 gem 'pure-css-rails'
@@ -22,3 +21,4 @@ group :development do
   gem 'web-console', '~> 2.0'
 end
 
+ruby "2.3.1"
